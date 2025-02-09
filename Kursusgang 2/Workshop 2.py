@@ -116,6 +116,12 @@ data3 = pd.read_excel('https://raw.githubusercontent.com/winthereig00/Anvendt-St
 
 print(data3)
 
+plt.figure(figsize=(8, 6)) 
+plt.pie(data3['Proportion'], labels = data3['Product'], autopct='%1.1f%%')
+plt.axis('equal')
+plt.title('Proportion of Oil Product')
+plt.show()
+
 
 
 
