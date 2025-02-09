@@ -8,9 +8,12 @@ Created on Sun Feb  9 16:24:57 2025
 
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
+
+
 
 """
-Exercise 4.12
+#Exercise 4.12
 """
 
 data = pd.read_excel("https://raw.githubusercontent.com/winthereig00/Anvendt-Statistik-F25/main/Kursusgang%203/Xr04-12.xlsx")
@@ -33,7 +36,7 @@ print('Mode:', mode)
 
 
 """
-Exercise 4.26
+#Exercise 4.26
 """
 
 numbers = np.array([12, 6, 22, 31, 23, 13, 15, 17, 21]) #Error in solution 21 is 31.
@@ -49,12 +52,12 @@ print("Standard error", std_error)
 
 
 """
-Exercise 4.37
+#Exercise 4.37
 """
 
 data2 = pd.read_excel("https://raw.githubusercontent.com/winthereig00/Anvendt-Statistik-F25/main/Kursusgang%203/Xr04-37.xlsx")
 
-print(data2)
+#print(data2)
 
 def fjong(data, column_name):
     column_data = data[column_name]
@@ -66,36 +69,71 @@ def fjong(data, column_name):
     return f'The mean is {m}, the variance is {v} and the standard error is {se}'
 
 
-print(fjong(data2, 'Speeds'))
-
-#def fjong2(fjong(data, column_name)):
- #   return f'75% of the data lies between [{m-2*se,m+2*se}] and 88.9% lies between [{m-3*se,m+3*se}]'
+#print(fjong(data2, 'Speeds'))
 
 
-#print(fjong2(fjong(data2, 'Speeds')))
+"""
+#Exercise 4.71
+"""
 
-# Combined function to calculate mean, variance, standard error, and ranges
-def analyze_data(data, column_name):
-    # Select the column from the DataFrame
-    column_data = data[column_name]
-    
-    # Ensure the data is numeric and remove any non-numeric or NaN values
-    column_data = pd.to_numeric(column_data, errors='coerce').dropna()
-    
-    # Calculate mean, variance (using pandas var function), and standard error
-    mean = column_data.mean()
-    variance = column_data.var(ddof=1)  # Sample variance
-    standard_error = np.sqrt(variance)
-    
-    # Calculate the 75% and 88.9% ranges based on the mean and standard error
-    range_75 = [mean - 2 * standard_error, mean + 2 * standard_error]
-    range_889 = [mean - 3 * standard_error, mean + 3 * standard_error]
-    
-    # Return a formatted string with all the information
-    return f"The mean is {mean}, the variance is {variance}, the standard error is {standard_error}, " \
-           f"75% of the data lies between {range_75} and 88.9% lies between {range_889}"
+data3 = pd.read_excel("https://raw.githubusercontent.com/winthereig00/Anvendt-Statistik-F25/main/Kursusgang%203/Xr04-71.xlsx")
 
-# Call the function for the 'Speeds' column and print the result
-result = analyze_data(data2, 'Speeds')
-print(result)
+print(data3)
+
+percentiles = data3['Times'].quantile([0.25, 0.5, 0.75]) #The quantile() method in pandas is used to compute the value at a specific percentile (or quantile) in a dataset.
+
+first_quartile = percentiles[0.25]
+print("First Quartile: ", first_quartile)
+
+median = percentiles[0.5]
+print("Second Quartile: ", median)
+
+third_quartile = percentiles[0.75]
+print("Third Quartile: ", third_quartile)
+
+# plot the data and measures on a histogram
+plt.hist(data3['Times'], bins=20, edgecolor='black', alpha=0.5, density=True) #Density=True gives percentages
+
+plt.axvline(first_quartile, color='red', label='1st Quartile')
+plt.axvline(median, color='green', label='Median')
+plt.axvline(third_quartile, color='red', label='3rd Quartile')
+plt.legend()
+plt.show()
+
+
+
+"""
+Exercise 4.83
+"""
+
+data4 = pd.read_excel("https://raw.githubusercontent.com/winthereig00/Anvendt-Statistik-F25/main/Kursusgang%203/Xr04-83.xlsx")
+
+print(data4)
+
+# Calculate covariance
+covariance = data4.cov().loc["Study time", "Marks"]
+print("Covariance:", covariance)
+
+# Calculate coefficient of correlation
+correlation = data4.corr().loc["Study time", "Marks"]
+print("Coefficient of correlation:", correlation)
+
+determination = correlation**2
+print("Coefficient of determination:", determination)
+
+#Visualise the data
+## Select the columns to use as x and y data
+x = data4["Study time"]
+y = data4["Marks"]
+
+# Plot the data
+plt.scatter(x,y)
+plt.xlabel("Study time")
+plt.ylabel("Marks")
+plt.title("Study time vs. Marks")
+plt.show()
+     
+
+
+
 
