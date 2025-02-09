@@ -61,6 +61,7 @@ percentages = 100 * data['Oil_reserves'] / total
 # Plot the pie chart
 plt.pie(percentages, labels=data['Country'], autopct='%1.1f%%', pctdistance=0.8)
 plt.axis('equal')
+plt.title('Oil Reserves per Country in Percent')
 #plt.show()
 
 
@@ -72,9 +73,14 @@ data2 = pd.read_excel('https://raw.githubusercontent.com/winthereig00/Anvendt-St
 
 data2.rename(columns = {'Consumption of oil (barrels per day)' : 'Consumption'}, inplace=True)
 
-print(data2)
+#Renaming some of the countries
+data2["Country"] = data2["Country"].replace({
+    "United Kingdom": "UK",
+    "Germany" : "GER",
+    "France" : "FRA",
+})
 
-
+#print(data2)
 
 #Bar chart:
 x = data2["Country"]
@@ -90,15 +96,31 @@ plt.xlabel("Country")
 plt.ylabel("Consumption")
 plt.title("Oil Consumption per Country")
 
-plt.show()
+#plt.show()
 
 #Pie Chart
 total2 = data2['Consumption'].sum()
 percentages2 = 100*data2['Consumption'] / total2
 
 plt.pie(percentages2, labels = data2['Country'], autopct='%1.1f%%', pctdistance=0.8)
-plt.axis('equal')
-plt.show()
+plt.axis('equal') # Equal aspect ratio ensures that pie is drawn as a circle.
+plt.title('Oil Consumption per Country in Percent')
+#plt.show()
+
+
+"""
+Exercise 2.16
+"""
+
+data3 = pd.read_excel('https://raw.githubusercontent.com/winthereig00/Anvendt-Statistik-F25/main/Kursusgang%202/Xr02-16.xlsx')
+
+print(data3)
+
+
+
+
+
+
 
 
 
