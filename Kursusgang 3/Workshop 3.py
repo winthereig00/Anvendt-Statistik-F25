@@ -138,7 +138,7 @@ plt.show()
 marks_mean = data4["Marks"].mean()
 study_mean = data4["Study time"].mean()
 
-num = ((data4["Study time"] - study_mean) * data4["Marks"]).sum()
+num = ((data4["Study time"] - study_mean) * data4["Marks"]).sum() #Removed marks_mean, because it does not make a difference
 den = ((data4["Study time"] - study_mean)**2).sum()
 
 #print(np.array([(data4["Study time"] - study_mean), (data4["Marks"] - marks_mean)]))
@@ -165,5 +165,65 @@ plt.title("Study time vs. Marks")
 plt.show()
 
 
+"""
+Exercise 4.130
+"""
+
+data5 = pd.read_excel("https://raw.githubusercontent.com/winthereig00/Anvendt-Statistik-F25/main/Kursusgang%203/Xr03-54.xlsx")
+
+print(data5)
+
+#Make a regression line:
+
+x = data5["Speed"]
+y = data5["Cost"]
+
+plt.scatter(x,y)
+
+def linear_regression(x,y):
+    slope = (((x-x.mean())*y).sum())/ (((x-x.mean())**2).sum())
+    intercept = y.mean() - slope*x.mean()
+    return slope, intercept
+
+a,b = linear_regression(x,y)
+est = lambda x: a*x+b
+
+plt.plot(data5["Speed"], a*data5["Speed"]+b, color='red')
+plt.xlabel("Speed")
+plt.ylabel("Cost")
+plt.title("Speed vs. Cost")
+
+plt.show()
+
+#Calculate R^2
+
+# Calculate coefficient of correlation
+correlation = data5.corr().loc["Speed", "Cost"]
+print("Coefficient of correlation:", correlation)
+
+determination = correlation**2
+print("Coefficient of determination:", determination)
+
+r2 = (((est(x)-y.mean())**2).sum())/(((y-y.mean())**2).sum())
+print(f'The determaninant coefficient, also known as R^2-coefficient, is {r2}')
+
+"""
+Ekstraopgave
+"""
+
+data6 = pd.read_excel("https://raw.githubusercontent.com/winthereig00/Anvendt-Statistik-F25/main/Kursusgang%203/Xr04-68.xlsx")
+
+print(data6)
+
+percentiles = data6.quantile(axis=0,q=[0.25, 0.5, 0.75]) #The quantile() method in pandas is used to compute the value at a specific percentile (or quantile) in a dataset.
+
+print(percentiles)
+
+fig,ax = plt.subplots()
+
+bplot = data6.boxplot()
+plt.title("Starting Offers for Bechelor Graduates")
+plt.ylabel("Money")
+plt.show()
 
 
