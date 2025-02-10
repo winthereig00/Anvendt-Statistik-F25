@@ -132,7 +132,37 @@ plt.xlabel("Study time")
 plt.ylabel("Marks")
 plt.title("Study time vs. Marks")
 plt.show()
-     
+
+#We know want to make the plot with the regression line using least squares method:
+
+marks_mean = data4["Marks"].mean()
+study_mean = data4["Study time"].mean()
+
+num = ((data4["Study time"] - study_mean) * data4["Marks"]).sum()
+den = ((data4["Study time"] - study_mean)**2).sum()
+
+#print(np.array([(data4["Study time"] - study_mean), (data4["Marks"] - marks_mean)]))
+
+slope = num / den
+print("Slope:", slope)
+
+intercept = marks_mean - slope * study_mean #We know the means are on the regression line
+print("Intercept:", intercept)
+
+# Use the line to make predictions
+predictions = intercept + slope * data4["Study time"]
+
+# Plot the data
+plt.scatter(x,y)
+
+# Plot the line
+plt.plot(data4["Study time"], predictions, color='red')
+plt.xlabel("Study time")
+plt.ylabel("Marks")
+plt.title("Study time vs. Marks")
+
+# Show the plot
+plt.show()
 
 
 
