@@ -57,7 +57,7 @@ print("Standard error", std_error)
 
 data2 = pd.read_excel("https://raw.githubusercontent.com/winthereig00/Anvendt-Statistik-F25/main/Kursusgang%203/Xr04-37.xlsx")
 
-#print(data2)
+print(data2)
 
 def fjong(data, column_name):
     column_data = data[column_name]
@@ -69,7 +69,7 @@ def fjong(data, column_name):
     return f'The mean is {m}, the variance is {v} and the standard error is {se}'
 
 
-#print(fjong(data2, 'Speeds'))
+print(fjong(data2, 'Speeds'))
 
 
 """
