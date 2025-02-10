@@ -21,7 +21,7 @@ data.head #Giving us a look at the data
 
 data.rename(columns = {'Oil Reserves (Barrels)' : 'Oil_reserves'}, inplace=True)
 
-#print(data)
+print(data)
 
 #Making a bar chart
 
@@ -39,7 +39,7 @@ plt.xlabel('Country')
 plt.ylabel('Oil Reserves')
 plt.title("Bar Chart of Oil Reserves (Barrels) per Country")
 
-#plt.show()
+plt.show()
 
 """
 Exercise 2.14 - Make a pie chart!
@@ -62,7 +62,7 @@ percentages = 100 * data['Oil_reserves'] / total
 plt.pie(percentages, labels=data['Country'], autopct='%1.1f%%', pctdistance=0.8)
 plt.axis('equal')
 plt.title('Oil Reserves per Country in Percent')
-#plt.show()
+plt.show()
 
 
 """
@@ -96,7 +96,7 @@ plt.xlabel("Country")
 plt.ylabel("Consumption")
 plt.title("Oil Consumption per Country")
 
-#plt.show()
+plt.show()
 
 #Pie Chart
 total2 = data2['Consumption'].sum()
@@ -105,7 +105,7 @@ percentages2 = 100*data2['Consumption'] / total2
 plt.pie(percentages2, labels = data2['Country'], autopct='%1.1f%%', pctdistance=0.8)
 plt.axis('equal') # Equal aspect ratio ensures that pie is drawn as a circle.
 plt.title('Oil Consumption per Country in Percent')
-#plt.show()
+plt.show()
 
 
 """
